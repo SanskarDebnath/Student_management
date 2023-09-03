@@ -1,0 +1,64 @@
+/* Add margin to the top and bottom of the "text" div */
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#text {
+    border-right: 0.15em solid white;
+    font-family: monospace;
+    font-size: 1.2em;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    animation: typing 5s steps(40) forwards;
+    color: #fff;
+  }
+  
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 38ch; } /* increase this value to fit the entire text */
+  }
+  
+  
+  /* Add margin to the top and bottom of the "twobuttons" div */
+  .twobuttons {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  /* Style the buttons */
+  .twobuttons button {
+    background-color: #d5820d; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .twobuttons button:hover {
+    background-color: #3e8e41; /* Dark green */
+  }
+  .background {
+    background-image: url("college.jpg"); /* Replace "your-image-url.jpg" with the actual URL or file path of your image */
+    background-size: cover;
+    background-position: center;
+  }
+  
+  #background {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+  }
+  
+  /* Rest of the CSS code for the "text" and "twobuttons" elements */
+    

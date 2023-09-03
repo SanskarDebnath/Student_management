@@ -1,0 +1,89 @@
+<body>
+  <nav class="navbar navbar-dark bg-dark fixed-top">
+    <!-- Navbar content -->
+  </nav>
+  <br><br><br>
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <!-- Alert content -->
+  </div>
+  <div id="page-content">
+    <!-- Page content -->
+    <p class="default">
+      <center>
+        <div class="alert alert-success">
+          <!-- Welcome message -->
+        </div>
+      </center>
+    </p>
+    <br><br>
+    <?php
+    // Fetch student information
+    $sql = "SELECT * FROM student WHERE sid = $usrid";
+    $result = mysqli_query($connection, $sql);
+    if (mysqli_num_rows($result) == 1) {
+      while ($row = mysqli_fetch_assoc($result)) {
+        ?>
+        <div class="container1 bg-gray-100 p-4 rounded-md">
+          <table class="ola w-3/4 mx-auto">
+            <!-- Display student information -->
+          </table>
+        </div>
+        <br>
+      <?php
+      }
+      mysqli_free_result($result);
+    } else {
+      // Handle case when no student information found
+    }
+    ?>
+    
+    <?php
+    // Fetch marks information
+    $sql = "SELECT subject_name, marks_obtained, semester FROM marks WHERE student_id = '$usrid'";
+    $result = $connection->query($sql);
+    ?>
+    
+    <?php if ($result->num_rows > 0) : ?>
+      <?php while ($row = $result->fetch_assoc()) : ?>
+        <?php if ($row !== null) : ?>
+          <div style="display: flex; justify-content: center;">
+            <?php $sem = $row["semester"]; ?>
+            <div class="alert alert-info" role="alert">
+              Showing results for Semester <?php echo $sem; ?>
+            </div>
+          </div>
+    
+          <div class="container2">
+            <table class="marks-table">
+              <thead>
+                <tr>
+                  <th>Subject Name</th>
+                  <th>Marks Obtained</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                // Reset the internal data pointer to the beginning of the result set
+                $result->data_seek(0);
+                while ($row = $result->fetch_assoc()) : ?>
+                  <?php if ($row['semester'] == $sem) : ?>
+                    <tr>
+                      <td><?php echo $row['subject_name']; ?></td>
+                      <td><?php echo $row['marks_obtained']; ?></td>
+                    </tr>
+                  <?php endif; ?>
+                <?php endwhile; ?>
+              </tbody>
+            </table>
+          </div>
+        <?php endif; ?>
+      <?php endwhile; ?>
+    <?php else : ?>
+      <div>
+        <h5>Midterm Marks Are Not Updated</h5>
+      </div>
+    <?php endif; ?>
+    
+    <?php $result->free_result(); ?>
+  </div> 
+</body>
